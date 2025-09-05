@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saumya Shah - FPGA/ASIC Engineer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00d4ff;
+            --secondary-color: #0099cc;
+            --accent-color: #ff6b35;
+            --dark-bg: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --gradient: linear-gradient(135deg, #00d4ff, #0099cc, #ff6b35);
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .circuit-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            z-index: -1;
+            background-image: 
+                radial-gradient(circle at 20% 50%, var(--primary-color) 1px, transparent 1px),
+                radial-gradient(circle at 80% 20%, var(--accent-color) 1px, transparent 1px),
+                linear-gradient(90deg, transparent 48%, var(--secondary-color) 50%, transparent 52%),
+                linear-gradient(0deg, transparent 48%, var(--primary-color) 50%, transparent 52%);
+            background-size: 50px 50px, 80px 80px, 25px 25px, 25px 25px;
+            animation: circuitMove 20s linear infinite;
+        }
+
+        @keyframes circuitMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50px, -50px); }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 120px 2rem 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Home Section */
+        .home {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+        }
+
+        .home-content {
+            flex: 1;
+            animation: slideInLeft 1s ease;
+        }
+
+        .home-visual {
+            flex: 1;
+            position: relative;
+        }
+
+        .chip-visualization {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--card-bg), var(--dark-bg));
+            border: 2px solid var(--primary-color);
+            border-radius: 20px;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .chip-pins {
+            position: absolute;
+        }
+
+        .chip-pins.left {
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .chip-pins.right {
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .chip-pins.top {
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .chip-pins.bottom {
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .pin {
+            width: 20px;
+            height: 6px;
+            background: var(--secondary-color);
+            margin: 8px 0;
+            animation: pinGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pinGlow {
+            0% { box-shadow: 0 0 5px var(--secondary-color); }
+            100% { box-shadow: 0 0 15px var(--primary-color); }
+        }
+
+        @keyframes slideInLeft {
+            0% { transform: translateX(-100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+        }
+
+        /* About Section */
+        .about {
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .about-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+        }
+
+        .project-header {
+            background: var(--gradient);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-icon {
+            font-size: 4rem;
+            color: white;
+            z-index: 2;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tech-tag {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .skill-category h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .skill-bar {
+            flex: 1;
+            height: 8px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 4px;
+            margin: 0 1rem;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 4px;
+            animation: skillLoad 2s ease-in-out;
+        }
+
+        @keyframes skillLoad {
+            0% { width: 0; }
+            100% { width: var(--progress); }
+        }
+
+        /* Contact Section */
+        .contact {
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Resume Section */
+        .resume {
+            text-align: center;
+        }
+
+        .resume-preview {
+            background: var(--card-bg);
+            border: 2px dashed var(--primary-color);
+            border-radius: 15px;
+            padding: 4rem 2rem;
+            margin: 2rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .resume-preview:hover {
+            background: rgba(0, 212, 255, 0.05);
+            transform: scale(1.02);
+        }
+
+        .resume-icon {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .home {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .chip-visualization {
+                width: 300px;
+                height: 300px;
+            }
+
+            .title {
+                font-size: 2.5rem;
+            }
+
+            section {
+                padding: 100px 1rem 40px;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="circuit-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">SaumyaShah</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="home">
+        <div class="home-content">
+            <h1 class="title">Saumya Shah</h1>
+            <p class="subtitle">FPGA • ASIC • Embedded Systems Engineer</p>
+            <p class="description">
+                Passionate about designing cutting-edge digital hardware solutions. 
+                Specializing in FPGA development, ASIC design, and embedded systems 
+                that push the boundaries of performance and efficiency.
+            </p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="#resume" class="btn btn-secondary">Download Resume</a>
+            </div>
+        </div>
+        <div class="home-visual">
+            <div class="chip-visualization">
+                <div class="chip-pins left">
+                    <div class="pin"></div>
+                    <div class="pin"></div>
+                    <div class="pin"></div>
+                    <div class="pin"></div>
+                    <div class="pin"></div>
+                </div>
+                <div class="chip-pins right">
+                    <div class="pin"></div>
+                    <div class="pin"></div>
+                    <div class="pin"></div>
+                    <div class="pin"></div>
+                    <div class="pin"></div>
+                </div>
+                <div class="chip-pins top">
+                    <div class="pin" style="width: 6px; height: 20px; margin: 0 8px;"></div>
+                    <div class="pin" style="width: 6px; height: 20px; margin: 0 8px;"></div>
+                    <div class="pin" style="width: 6px; height: 20px; margin: 0 8px;"></div>
+                    <div class="pin" style="width: 6px; height: 20px; margin: 0 8px;"></div>
+                </div>
+                <div class="chip-pins bottom">
+                    <div class="pin" style="width: 6px; height: 20px; margin: 0 8px;"></div>
+                    <div class="pin" style="width: 6px; height: 20px; margin: 0 8px;"></div>
+                    <div class="pin" style="width: 6px; height: 20px; margin: 0 8px;"></div>
+                    <div class="pin" style="width: 6px; height: 20px; margin: 0 8px;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about fade-in">
+        <h2 class="section-title">About Me</h2>
+        <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            With X years of experience in digital design and embedded systems, I specialize in creating 
+            innovative hardware solutions that bridge the gap between concept and silicon.
+        </p>
+        
+        <div class="about-grid">
+            <div class="about-card">
+                <div class="card-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <h3>FPGA Development</h3>
+                <p>Expert in Xilinx and Intel FPGA platforms, developing high-performance digital signal processing and communication systems.</p>
+            </div>
+            
+            <div class="about-card">
+                <div class="card-icon">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <h3>ASIC Design</h3>
+                <p>Experienced in full ASIC design flow from RTL to GDSII, including synthesis, place & route, and timing closure.</p>
+            </div>
+            
+            <div class="about-card">
+                <div class="card-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3>Embedded Systems</h3>
+                <p>Proficient in embedded software and hardware co-design, real-time systems, and low-power design techniques.</p>
+            </div>
+        </div>
+    </section>
+
+   <!-- Projects Section -->
+<section id="projects" class="fade-in">
+    <h2 class="section-title">Featured Projects</h2>
+    
+    <div class="projects-grid">
+
+        <!-- Sobel Edge Detection -->
+        <div class="project-card">
+            <div class="project-header">
+                <div class="project-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+            </div>
+            <div class="project-content">
+                <h3 class="project-title">Sobel Edge-Detection Accelerator</h3>
+                <p>Implemented a Sobel filter accelerator on FPGA using HLS, integrated with ARM HPS for HW/SW co-design. Achieved 14% latency reduction and verified cycle-accurate timing and resource utilization.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">FPGA</span>
+                    <span class="tech-tag">HLS</span>
+                    <span class="tech-tag">ARM</span>
+                    <span class="tech-tag">Image Processing</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Digital Fault Analysis -->
+        <div class="project-card">
+            <div class="project-header">
+                <div class="project-icon">
+                    <i class="fas fa-bug"></i>
+                </div>
+            </div>
+            <div class="project-content">
+                <h3 class="project-title">Design & Fault Analysis of Digital Circuits</h3>
+                <p>Designed combinational and sequential circuits in Verilog, synthesized with Synopsys Design Compiler, and enhanced test coverage with ATPG in TetraMAX. Improved fault coverage by 10–12%.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Verilog</span>
+                    <span class="tech-tag">Synopsys DC</span>
+                    <span class="tech-tag">TetraMAX</span>
+                    <span class="tech-tag">ATPG</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Audio Processor -->
+        <div class="project-card">
+            <div class="project-header">
+                <div class="project-icon">
+                    <i class="fas fa-music"></i>
+                </div>
+            </div>
+            <div class="project-content">
+                <h3 class="project-title">Mini Stereo Digital Audio Processor (7nm)</h3>
+                <p>Designed RTL architecture with custom two-channel FIR filter and memory controller. Synthesized in Synopsys DC (ASAP 7nm), automated PnR, STA, and power optimization with TCL scripts.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Verilog</span>
+                    <span class="tech-tag">ASAP 7nm</span>
+                    <span class="tech-tag">Synopsys</span>
+                    <span class="tech-tag">EDA Flow</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Branch Predictors -->
+        <div class="project-card">
+            <div class="project-header">
+                <div class="project-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+            </div>
+            <div class="project-content">
+                <h3 class="project-title">Branch Predictor & Cache Analysis</h3>
+                <p>Analyzed cache strategies and branch predictors using GEM5. Derived optimal CPI configuration and built Python scripts to speed up benchmark execution by 30%.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">GEM5</span>
+                    <span class="tech-tag">CPU Architecture</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Performance Analysis</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FPU / RISC Processor -->
+        <div class="project-card">
+            <div class="project-header">
+                <div class="project-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+            </div>
+            <div class="project-content">
+                <h3 class="project-title">Custom RISC Processor & FPU Design</h3>
+                <p>Built an 8-bit RISC processor and a floating-point unit in Verilog with hazard detection, pipelining, and GF65 custom cell libraries. Deployed and verified on FPGA and Cadence Innovus.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Verilog</span>
+                    <span class="tech-tag">FPGA</span>
+                    <span class="tech-tag">Cadence</span>
+                    <span class="tech-tag">GF65</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Embedded / Robotics -->
+        <div class="project-card">
+            <div class="project-header">
+                <div class="project-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+            </div>
+            <div class="project-content">
+                <h3 class="project-title">4-Wheel Holonomic Robot</h3>
+                <p>Built a STM32F4 + Arduino based holonomic drive robot. Implemented SPI, I2C, and USART drivers, integrated PS4 controller, and designed fuzzy logic algorithms for autonomous navigation.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">STM32</span>
+                    <span class="tech-tag">Arduino</span>
+                    <span class="tech-tag">Fuzzy Logic</span>
+                    <span class="tech-tag">Robotics</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Skills Section -->
+<section id="skills" class="fade-in">
+    <h2 class="section-title">Technical Skills</h2>
+    
+    <div class="skills-grid">
+
+        <!-- HDL & Hardware Languages -->
+        <div class="skill-category">
+            <h3><i class="fas fa-code"></i> HDL Languages</h3>
+            <div class="skill-item">
+                <span>Verilog</span>
+                <div class="skill-bar"><div class="skill-progress" style="--progress: 95%;"></div></div>
+                <span>95%</span>
+            </div>
+            <div class="skill-item">
+                <span>SystemVerilog</span>
+                <div class="skill-bar"><div class="skill-progress" style="--progress: 90%;"></div></div>
+                <span>90%</span>
+            </div>
+            <div class="skill-item">
+                <span>VHDL</span>
+                <div class="skill-bar"><div class="skill-progress" style="--progress: 80%;"></div></div>
+                <span>80%</span>
+            </div>
+        </div>
+
+        <!-- Programming -->
+        <div class="skill-category">
+            <h3><i class="fas fa-laptop-code"></i> Programming</h3>
+            <div class="skill-item">
+                <span>C / C++</span>
+                <div class="skill-bar"><div class="skill-progress" style="--progress: 88%;"></div></div>
+                <span>88%</span>
+            </div>
+            <div class="skill-item">
+                <span>Python</span>
+                <div class="skill-bar"><div class="skill-progress" style="--progress: 82%;"></div></div>
+                <span>82%</span>
+            </div>
+            <div class="skill-item">
+                <span>Perl / TCL</span>
+                <div class="skill-bar"><div class="skill-progress" style="--progress: 75%;"></div></div>
+                <span>75%</span>
+            </div>
+        </div>
+
+        <!-- EDA Tools -->
+        <div class="skill-category">
+            <h3><i class="fas fa-tools"></i> EDA Tools</h3>
+            <div class="skill-item">
+                <span>Cadence (Virtuoso, Innovus)</span>
+                <div class="skill-bar"><div class="skill-progress" style="--progress: 85%;"></div></div>
+                <span>85%</span>
+            </div>
+            <div class="skill-item">
+                <span>Synopsys (DC, PrimeTime, TetraMAX)</span>
+                <div class="skill-bar"><div class="skill-progress" style="--progress: 90%;"></div></div>
+                <span>90%</span>
+            </div>
+            <div class="skill-item">
+                <span>ModelSim / VCS</span>
+                <div class="skill-bar"><div class="skill-progress" style="--progress: 88%;"></div></div>
+                <span>88%</span>
+            </div>
+        </div>
+
+        <!-- Embedded & IoT -->
+        <div class="skill-category">
+            <h3><i class="fas fa-microchip"></i> Embedded & IoT</h3>
+            <div class="skill-item">
+                <span>STM32 / ESP32</span>
+                <div class="skill-bar"><div class="skill-progress" style="--progress: 85%;"></div></div>
+                <span>85%</span>
+            </div>
+            <div class="skill-item">
+                <span>FreeRTOS / Event-Driven FW</span>
+                <div class="skill-bar"><div class="skill-progress" style="--progress: 80%;"></div></div>
+                <span>80%</span>
+            </div>
+            <div class="skill-item">
+                <span>KiCAD / PCB Design</span>
+                <div class="skill-bar"><div class="skill-progress" style="--progress: 75%;"></div></div>
+                <span>75%</span>
+            </div>
+        </div>
+
+        <!-- Protocols -->
+        <div class="skill-category">
+            <h3><i class="fas fa-network-wired"></i> Protocols</h3>
+            <div class="skill-item">
+                <span>I²C / SPI / UART</span>
+                <div class="skill-bar"><div class="skill-progress" style="--progress: 90%;"></div></div>
+                <span>90%</span>
+            </div>
+            <div class="skill-item">
+                <span>MQTT / HTTP</span>
+                <div class="skill-bar"><div class="skill-progress" style="--progress: 85%;"></div></div>
+                <span>85%</span>
+            </div>
+            <div class="skill-item">
+                <span>Wi-Fi / Bluetooth</span>
+                <div class="skill-bar"><div class="skill-progress" style="--progress: 80%;"></div></div>
+                <span>80%</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Resume Section -->
+<section id="resume" class="resume fade-in">
+    <h2 class="section-title">Resume</h2>
+    
+    <div class="resume-preview">
+        <div class="resume-icon">
+            <i class="fas fa-file-pdf"></i>
+        </div>
+        <h3>Download My Resume</h3>
+        <p>Get a comprehensive overview of my experience, education, and technical skills.</p>
+        <!-- You can link to multiple resumes or just one -->
+        <a href="./Saumya_Shah_CV.pdf" class="btn btn-primary" download>
+            <i class="fas fa-download"></i> Download PDF
+        </a>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+        
+        <!-- Education -->
+        <div class="about-card">
+            <div class="card-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h3>Education</h3>
+            <p>
+                <strong>M.S. in Electrical Engineering</strong><br>
+                The University of Texas at Dallas, Jan 2023 – Dec 2024<br>
+                GPA: 3.78/4.00<br><br>
+                <strong>B.E. in Electronics and Communication Engineering</strong><br>
+                Nirma University, Jul 2018 – Jun 2022
+            </p>
+        </div>
+        
+        <!-- Certifications -->
+        <div class="about-card">
+            <div class="card-icon">
+                <i class="fas fa-certificate"></i>
+            </div>
+            <h3>Certifications</h3>
+            <p>
+                • Basic Static Timing Analysis (Cadence)<br>
+                <!-- • Additional ASIC/FPGA/Embedded certifications (if any, can be added later) -->
+            </p>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact fade-in">
+        <h2 class="section-title">Get In Touch</h2>
+        <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 3rem;">
+            Let's collaborate on innovative hardware solutions
+        </p>
+        
+                <div class="contact-grid">
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3>Email</h3>
+                <p><a href="mailto:saumyashah02000@gmail.com" style="color: var(--primary-color); text-decoration: none;">saumyashah02000@gmail.com</a></p>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fab fa-linkedin"></i>
+                </div>
+                <h3>LinkedIn</h3>
+                <p><a href="https://linkedin.com/in/saumya-shah-ss" target="_blank" style="color: var(--primary-color); text-decoration: none;">linkedin.com/in/saumya-shah-ss</a></p>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fab fa-github"></i>
+                </div>
+                <h3>GitHub</h3>
+                <p><a href="https://github.com/saumyatshah" target="_blank" style="color: var(--primary-color); text-decoration: none;">github.com/saumyatshah</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: rgba(10, 10, 10, 0.95); border-top: 1px solid rgba(0, 212, 255, 0.2); text-align: center; padding: 2rem; color: var(--text-secondary); font-size: 0.9rem;">
+        <p>&copy; 2025 Saumya Shah. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Scroll animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const onScroll = () => {
+            const triggerBottom = window.innerHeight * 0.85;
+            fadeElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < triggerBottom) {
+                    el.classList.add('visible');
+                }
+            });
+        };
+        window.addEventListener('scroll', onScroll);
+        onScroll();
+
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        mobileMenu.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.gap = '1rem';
+            navLinks.style.background = 'rgba(10,10,10,0.95)';
+            navLinks.style.padding = '1rem';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '60px';
+            navLinks.style.right = '20px';
+            navLinks.style.borderRadius = '10px';
+        });
+    </script>
+</body>
+</html>
