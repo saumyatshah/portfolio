@@ -469,6 +469,171 @@
         }
         .id-stat .u { font-size: 0.95rem; color: var(--muted); margin-left: 4px; }
 
+        /* ---------- EXPERIENCE / timeline ---------- */
+        .timeline {
+            position: relative;
+            padding-left: 2.2rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px; top: 16px; bottom: 16px;
+            width: 1px;
+            background: linear-gradient(180deg, var(--cyan) 0%, var(--cyan-line) 30%, transparent 100%);
+        }
+        .exp-card {
+            background: var(--panel);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,212,255,0.12);
+            padding: 1.6rem 1.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            transition: all 0.35s ease;
+        }
+        .exp-card::before {
+            content: '';
+            position: absolute;
+            left: -2.2rem;
+            top: 1.7rem;
+            width: 15px; height: 15px;
+            background: var(--bg);
+            border: 2px solid var(--cyan);
+            border-radius: 50%;
+            transform: translateX(-7px);
+            box-shadow: 0 0 12px var(--cyan-soft);
+        }
+        .exp-card.current::before {
+            background: var(--cyan);
+            box-shadow: 0 0 18px var(--cyan);
+            animation: pulse 2.2s ease-in-out infinite;
+        }
+        .exp-card:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 14px 32px rgba(0,212,255,0.14), 0 0 0 1px rgba(0,212,255,0.2);
+            transform: translateX(4px);
+        }
+        .exp-meta {
+            display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+            font-family: var(--mono); font-size: 0.72rem;
+            color: var(--muted);
+            letter-spacing: 0.12em;
+            margin-bottom: 0.9rem;
+            flex-wrap: wrap;
+        }
+        .exp-status { color: var(--cyan); }
+        .exp-card.current .exp-status { color: var(--orange); }
+        .exp-role {
+            font-family: var(--sans);
+            font-size: 1.35rem;
+            color: var(--ink);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.005em;
+        }
+        .exp-company {
+            font-family: var(--mono);
+            color: var(--cyan);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.04em;
+        }
+        .exp-company::before { content: '@ '; color: var(--orange); }
+        .exp-summary {
+            color: var(--ink);
+            font-size: 0.98rem;
+            margin-bottom: 1rem;
+            line-height: 1.55;
+        }
+        .exp-bullets {
+            list-style: none;
+            margin: 0 0 1.2rem 0;
+            padding: 0;
+        }
+        .exp-bullets li {
+            color: var(--muted);
+            font-size: 0.92rem;
+            padding-left: 1.4rem;
+            margin-bottom: 0.55rem;
+            position: relative;
+            line-height: 1.55;
+        }
+        .exp-bullets li::before {
+            content: '▸';
+            position: absolute;
+            left: 0; top: 0;
+            color: var(--cyan);
+            font-family: var(--mono);
+        }
+        .exp-bullets li b {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .exp-bullets li code {
+            font-family: var(--mono);
+            color: var(--cyan);
+            font-size: 0.88em;
+            padding: 1px 6px;
+            background: rgba(0,212,255,0.08);
+            border: 1px solid rgba(0,212,255,0.2);
+        }
+        .exp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+        /* ---------- IDENTITY / domain highlights ---------- */
+        .id-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.2rem;
+            margin-top: 3rem;
+        }
+        .hl-card {
+            background: var(--panel);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,212,255,0.12);
+            padding: 1.3rem 1.4rem;
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .hl-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px; height: 100%;
+            background: var(--gradient);
+            transform: scaleY(0.4);
+            transform-origin: top;
+            transition: transform 0.4s ease;
+        }
+        .hl-card:hover {
+            border-color: var(--cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 14px 30px rgba(0,212,255,0.12);
+        }
+        .hl-card:hover::before { transform: scaleY(1); }
+        .hl-domain {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.16em;
+            color: var(--orange);
+            margin-bottom: 0.5rem;
+        }
+        .hl-title {
+            font-family: var(--sans);
+            font-size: 1.05rem;
+            color: var(--cyan);
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.005em;
+        }
+        .hl-body {
+            color: var(--muted);
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+        .hl-body b { color: var(--ink); font-weight: 600; }
+
         /* ---------- WORKS / projects ---------- */
         .filters {
             display: flex; flex-wrap: wrap; gap: 0.5rem;
@@ -902,10 +1067,11 @@
         <ul class="nav-links" id="nav-links">
             <li><a href="#home" data-nav="home"><span class="idx">00</span>Home</a></li>
             <li><a href="#identity" data-nav="identity"><span class="idx">01</span>Identity</a></li>
-            <li><a href="#works" data-nav="works"><span class="idx">02</span>Works</a></li>
-            <li><a href="#stack" data-nav="stack"><span class="idx">03</span>Stack</a></li>
-            <li><a href="#dossier" data-nav="dossier"><span class="idx">04</span>Dossier</a></li>
-            <li><a href="#signal" data-nav="signal"><span class="idx">05</span>Signal</a></li>
+            <li><a href="#experience" data-nav="experience"><span class="idx">02</span>Experience</a></li>
+            <li><a href="#works" data-nav="works"><span class="idx">03</span>Works</a></li>
+            <li><a href="#stack" data-nav="stack"><span class="idx">04</span>Stack</a></li>
+            <li><a href="#dossier" data-nav="dossier"><span class="idx">05</span>Dossier</a></li>
+            <li><a href="#signal" data-nav="signal"><span class="idx">06</span>Signal</a></li>
         </ul>
         <div class="mobile-menu" id="mobile-menu"><span></span><span></span><span></span></div>
     </div>
@@ -913,12 +1079,13 @@
 
 <!-- ===== Side rail ===== -->
 <aside class="siderail" aria-hidden="true">
-    <a href="#home"     data-rail="home"><span class="label">HOME</span><span>00</span></a>
-    <a href="#identity" data-rail="identity"><span class="label">IDENTITY</span><span>01</span></a>
-    <a href="#works"    data-rail="works"><span class="label">WORKS</span><span>02</span></a>
-    <a href="#stack"    data-rail="stack"><span class="label">STACK</span><span>03</span></a>
-    <a href="#dossier"  data-rail="dossier"><span class="label">DOSSIER</span><span>04</span></a>
-    <a href="#signal"   data-rail="signal"><span class="label">SIGNAL</span><span>05</span></a>
+    <a href="#home"       data-rail="home"><span class="label">HOME</span><span>00</span></a>
+    <a href="#identity"   data-rail="identity"><span class="label">IDENTITY</span><span>01</span></a>
+    <a href="#experience" data-rail="experience"><span class="label">EXPERIENCE</span><span>02</span></a>
+    <a href="#works"      data-rail="works"><span class="label">WORKS</span><span>03</span></a>
+    <a href="#stack"      data-rail="stack"><span class="label">STACK</span><span>04</span></a>
+    <a href="#dossier"    data-rail="dossier"><span class="label">DOSSIER</span><span>05</span></a>
+    <a href="#signal"     data-rail="signal"><span class="label">SIGNAL</span><span>06</span></a>
 </aside>
 
 <!-- ===== [00] HOME ===== -->
@@ -953,8 +1120,9 @@
         </div>
         <p class="description">
             I design digital hardware where silicon meets system — from RTL to GDSII,
-            from FPGA fabrics to embedded firmware. Building accelerators, processors,
-            and the connective tissue between them.
+            from FPGA fabrics to embedded firmware, from a Gerber file to a populated board.
+            Building accelerators, processors, IoT devices, and the manufacturing tooling
+            that moves them through the assembly line.
         </p>
         <div class="cta-buttons">
             <a href="#works" class="btn btn-primary">view_works</a>
@@ -1018,13 +1186,31 @@
         <div class="id-text">
             <p>
                 I work at the boundary between <strong>hardware</strong> and <strong>system</strong> —
-                the place where Verilog meets timing closure meets a real product shipping at speed.
-                My background spans full <strong>ASIC design</strong> flow (RTL → synthesis → PnR → STA),
-                <strong>FPGA acceleration</strong>, and <strong>embedded firmware</strong> on STM32 and ESP32 platforms.
+                where Verilog meets timing closure, where a Gerber file meets a production line,
+                where firmware meets a shipping product. My range covers the full digital stack:
+                from <strong>RTL through GDSII</strong>, from FPGA fabric to embedded firmware,
+                from a customer's CAD output to a populated PCB on its way out the door.
             </p>
             <p>
-                M.S. Electrical Engineering, UT Dallas. Currently building accelerators,
-                fault-tolerant digital circuits, and the IoT firmware that ties them together.
+                Across <strong>nine engineering projects</strong> and <strong>two production roles</strong>,
+                I've designed and verified a <strong>7nm stereo audio ASIC</strong> through the full
+                Synopsys flow, accelerated <strong>Sobel edge-detection on FPGA</strong> with ARM HPS
+                co-design (14% latency cut via HLS), built a <strong>custom 8-bit RISC processor and FPU</strong>
+                with pipelining and hazard detection on GF65 cells, hardened fault coverage by 10–12%
+                through <strong>Synopsys DC + TetraMAX ATPG</strong>, analyzed branch predictor and cache
+                strategies in <strong>GEM5</strong>, shipped an <strong>ESP32-S3 IoT firmware</strong>
+                platform with FreeRTOS + MQTT + OTA + BLE Wi-Fi provisioning, ran multi-sensor
+                acquisition on <strong>STM32F7</strong>, built a <strong>4-wheel holonomic robot</strong>
+                on STM32F4 with fuzzy-logic navigation, and laid out <strong>custom KiCAD PCBs</strong>
+                for the embedded systems they sit on.
+            </p>
+            <p>
+                Today, I'm a <strong>Development Engineer at Express Fab USA</strong>, building the
+                Python platform that automates PCB pre-production end-to-end — Gerber rail generation
+                on gerbonara, BOM/POS parsing, DigiKey + Mouser procurement, and the relational schema
+                that ties order intake to assembly completion. Prior: <strong>Embedded Engineer at
+                Winwinlabs</strong>, designing custom PCBs and ESP32-S3 firmware with OTA.
+                M.S. Electrical Engineering, UT Dallas · B.E. ECE, Nirma University.
             </p>
 
             <div class="id-stats">
@@ -1037,18 +1223,132 @@
                     <div class="v" data-count="9">0<span class="u"> shipped</span></div>
                 </div>
                 <div class="id-stat">
-                    <div class="k">STACKS</div>
-                    <div class="v" data-count="12">0<span class="u">+</span></div>
+                    <div class="k">ROLES</div>
+                    <div class="v" data-count="2">0<span class="u"> to date</span></div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="id-highlights">
+        <div class="hl-card">
+            <div class="hl-domain">// SILICON · ASIC</div>
+            <div class="hl-title">RTL → GDSII Flow</div>
+            <div class="hl-body">
+                <b>7nm stereo audio processor</b> with custom two-channel FIR + memory controller in Synopsys DC (ASAP 7nm); TCL-automated PnR, STA, and power optimization. <b>Fault analysis</b> across combinational + sequential designs with Synopsys DC + TetraMAX ATPG — coverage improved 10–12%.
+            </div>
+        </div>
+        <div class="hl-card">
+            <div class="hl-domain">// FPGA · COMPUTE</div>
+            <div class="hl-title">Accelerators &amp; Processors</div>
+            <div class="hl-body">
+                <b>Sobel edge-detection accelerator</b> via HLS, integrated with ARM HPS — 14% latency reduction, cycle-accurate verification. <b>Custom 8-bit RISC + FPU</b> in Verilog with pipelining, hazard detection, GF65 cells; deployed on FPGA and Cadence Innovus. <b>GEM5</b> branch predictor + cache analysis with Python scripting (30% benchmark speed-up).
+            </div>
+        </div>
+        <div class="hl-card">
+            <div class="hl-domain">// EMBEDDED · IOT</div>
+            <div class="hl-title">Firmware &amp; Real-Time</div>
+            <div class="hl-body">
+                <b>ESP32-S3 IoT platform</b> — event-driven firmware, DS18B20/DHT22 acquisition, MQTT + WebSocket streaming, OTA updates, BLE Wi-Fi provisioning, LittleFS UI, NVS storage. <b>STM32F7 + FreeRTOS</b> concurrent sensor acquisition piped to ESP8266 over USART. <b>4-wheel holonomic robot</b> on STM32F4 + Arduino with SPI/I²C/USART drivers and fuzzy-logic autonomy.
+            </div>
+        </div>
+        <div class="hl-card">
+            <div class="hl-domain">// MANUFACTURING · TOOLING</div>
+            <div class="hl-title">PCB Automation Platform</div>
+            <div class="hl-body">
+                Internal web-based order management at <b>Express Fab USA</b>: Gerber rail generator on <b>gerbonara</b> with adaptive curved trapezoid profiles and Code 128B barcode silkscreen; automated file-type classification; <b>BOM/POS parsers</b> with multi-tab Excel; Pick-and-Place normalizer; two-phase <b>DigiKey + Mouser</b> supplier cart with MPN reel dedup; full procurement schema.
+            </div>
+        </div>
+        <div class="hl-card">
+            <div class="hl-domain">// PCB · HARDWARE</div>
+            <div class="hl-title">Boards &amp; Bringup</div>
+            <div class="hl-body">
+                Custom development boards in <b>KiCAD</b> around LPC17xx and STM32F4 for robotics and embedded targets, integrating sensors and motor control. Product-PCB design at <b>Winwinlabs</b> — schematic capture, layout, and hardware validation for an ESP32-S3 IoT product brought to production.
+            </div>
+        </div>
+        <div class="hl-card">
+            <div class="hl-domain">// METHOD · MINDSET</div>
+            <div class="hl-title">From Intent to Operation</div>
+            <div class="hl-body">
+                The connective thread across all of this is the same: take a digital system from intent to silicon to operation. Whether that's a Verilog module headed for tapeout or a Python pipeline shaping a customer's Gerber set into a manufacturable board — the work is making hardware <b>behave</b>, predictably and at speed.
             </div>
         </div>
     </div>
 </section>
 
-<!-- ===== [02] WORKS ===== -->
-<section id="works" class="reveal">
+<!-- ===== [02] EXPERIENCE ===== -->
+<section id="experience" class="reveal">
     <div class="sec-header">
         <span class="sec-id">[02]</span>
+        <h2 class="sec-title">Experience</h2>
+        <div class="sec-rule"></div>
+        <span class="sec-meta">// log.career</span>
+    </div>
+
+    <div class="timeline">
+
+        <article class="exp-card current">
+            <div class="exp-meta">
+                <span class="exp-status">// ACTIVE</span>
+                <span class="exp-date">DEC 2025 — PRESENT</span>
+            </div>
+            <h3 class="exp-role">Development Engineer</h3>
+            <div class="exp-company">Express Fab USA</div>
+            <p class="exp-summary">
+                Building an internal PCB pre-production automation platform — unifying Gerber processing,
+                BOM/POS parsing, and supplier procurement into a single web-based order management system.
+            </p>
+            <ul class="exp-bullets">
+                <li>Built a <b>Gerber rail generation tool</b> on <code>gerbonara</code> that parses customer RS-274X files and programmatically appends tooling rails with adaptive curved trapezoid profiles and Code 128B barcode silkscreen geometry — handling CAD output variability across major EDA tools.</li>
+                <li>Implemented <b>automated Gerber file-type classification</b> feeding a relational database that drives downstream BOM, POS, and layer routing across the assembly pipeline.</li>
+                <li>Built <b>BOM &amp; POS parsers</b> with multi-format Excel support, splitting combined multi-tab customer files into independent streams without modifying the core parser interface.</li>
+                <li>Developed a <b>Pick-and-Place file normalizer</b> accepting any incoming format and emitting a consistent output contract for the placement parser, with graceful engine degradation for legacy formats.</li>
+                <li>Implemented a <b>two-phase supplier cart engine</b> integrating DigiKey and Mouser APIs — handling part resolution, reel deduplication by MPN, and a single callable entry point usable across CLI, web routes, and scheduled jobs.</li>
+                <li>Designed and maintain the <b>order &amp; procurement database schema</b>, including full status lifecycle tracking from order intake through assembly completion.</li>
+            </ul>
+            <div class="exp-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">gerbonara</span>
+                <span class="tech-tag">RS-274X</span>
+                <span class="tech-tag">SQL</span>
+                <span class="tech-tag">DigiKey API</span>
+                <span class="tech-tag">Mouser API</span>
+                <span class="tech-tag">PCB Automation</span>
+            </div>
+        </article>
+
+        <article class="exp-card">
+            <div class="exp-meta">
+                <span class="exp-status">// PRIOR</span>
+                <span class="exp-date">APR 2025 — DEC 2025</span>
+            </div>
+            <h3 class="exp-role">Embedded Engineer</h3>
+            <div class="exp-company">Winwinlabs</div>
+            <p class="exp-summary">
+                Designed embedded hardware and firmware for a production IoT product — from custom PCB
+                bringup through real-time firmware and OTA delivery.
+            </p>
+            <ul class="exp-bullets">
+                <li>Built a <b>real-time data acquisition and communication system</b> on the ESP32-S3, using timing analysis and resource optimization to ensure consistent performance across deployments.</li>
+                <li>Implemented <b>automated OTA updates</b>, configuration handling, and debug tooling — improving firmware maintainability and streamlining development workflows.</li>
+                <li>Designed and brought up a <b>custom production PCB</b> — schematic capture, layout, and hardware validation in line with embedded design best practices.</li>
+            </ul>
+            <div class="exp-tags">
+                <span class="tech-tag">ESP32-S3</span>
+                <span class="tech-tag">FreeRTOS</span>
+                <span class="tech-tag">OTA</span>
+                <span class="tech-tag">PCB Design</span>
+                <span class="tech-tag">Schematic Capture</span>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<!-- ===== [03] WORKS ===== -->
+<section id="works" class="reveal">
+    <div class="sec-header">
+        <span class="sec-id">[03]</span>
         <h2 class="sec-title">Works</h2>
         <div class="sec-rule"></div>
         <span class="sec-meta">// archive.9</span>
@@ -1323,10 +1623,10 @@
     </div>
 </section>
 
-<!-- ===== [03] STACK ===== -->
+<!-- ===== [04] STACK ===== -->
 <section id="stack" class="reveal">
     <div class="sec-header">
-        <span class="sec-id">[03]</span>
+        <span class="sec-id">[04]</span>
         <h2 class="sec-title">Stack</h2>
         <div class="sec-rule"></div>
         <span class="sec-meta">// tooling.map</span>
@@ -1348,11 +1648,12 @@
         <div class="stack-cat">
             <h3><span class="idx">/02</span> Programming</h3>
             <div class="nodes">
+                <span class="node" data-w="3">Python</span>
                 <span class="node" data-w="3">C / C++</span>
-                <span class="node" data-w="2">Python</span>
+                <span class="node" data-w="2">SQL</span>
                 <span class="node" data-w="2">TCL</span>
+                <span class="node" data-w="2">Bash</span>
                 <span class="node" data-w="1">Perl</span>
-                <span class="node" data-w="1">Bash</span>
             </div>
         </div>
 
@@ -1372,11 +1673,11 @@
         <div class="stack-cat">
             <h3><span class="idx">/04</span> Embedded &amp; IoT</h3>
             <div class="nodes">
+                <span class="node" data-w="3">ESP32 / S3</span>
                 <span class="node" data-w="3">STM32</span>
-                <span class="node" data-w="3">ESP32</span>
-                <span class="node" data-w="2">FreeRTOS</span>
+                <span class="node" data-w="3">FreeRTOS</span>
+                <span class="node" data-w="2">OTA Updates</span>
                 <span class="node" data-w="2">Arduino</span>
-                <span class="node" data-w="2">KiCAD</span>
                 <span class="node" data-w="1">LPC17xx</span>
             </div>
         </div>
@@ -1389,8 +1690,34 @@
                 <span class="node" data-w="3">UART / USART</span>
                 <span class="node" data-w="2">MQTT</span>
                 <span class="node" data-w="2">HTTP / WS</span>
+                <span class="node" data-w="2">REST APIs</span>
                 <span class="node" data-w="2">BLE</span>
                 <span class="node" data-w="2">Wi-Fi</span>
+            </div>
+        </div>
+
+        <div class="stack-cat">
+            <h3><span class="idx">/06</span> PCB &amp; Manufacturing</h3>
+            <div class="nodes">
+                <span class="node" data-w="3">KiCAD</span>
+                <span class="node" data-w="3">Gerber / RS-274X</span>
+                <span class="node" data-w="3">gerbonara</span>
+                <span class="node" data-w="2">Schematic Capture</span>
+                <span class="node" data-w="2">BOM / POS</span>
+                <span class="node" data-w="2">DigiKey API</span>
+                <span class="node" data-w="2">Mouser API</span>
+            </div>
+        </div>
+
+        <div class="stack-cat">
+            <h3><span class="idx">/07</span> Systems &amp; Backend</h3>
+            <div class="nodes">
+                <span class="node" data-w="3">Relational DB Design</span>
+                <span class="node" data-w="3">Web APIs</span>
+                <span class="node" data-w="2">Excel / openpyxl</span>
+                <span class="node" data-w="2">Git</span>
+                <span class="node" data-w="2">CLI Tooling</span>
+                <span class="node" data-w="2">Scheduled Jobs</span>
             </div>
         </div>
 
@@ -1398,16 +1725,16 @@
 
     <div class="marquee" aria-hidden="true">
         <div class="marquee-track">
-            <span><b>RTL</b> · <b>SYNTHESIS</b> · <b>PLACE &amp; ROUTE</b> · <b>STA</b> · <b>DFT</b> · <b>ATPG</b> · <b>POWER ANALYSIS</b> · <b>VERIFICATION</b> · <b>UVM</b> · <b>HLS</b> · <b>FPGA</b> · <b>ASIC</b> · <b>FIRMWARE</b> · <b>FREERTOS</b> · <b>MQTT</b> · <b>PCB</b> · <b>KICAD</b> ·</span>
-            <span><b>RTL</b> · <b>SYNTHESIS</b> · <b>PLACE &amp; ROUTE</b> · <b>STA</b> · <b>DFT</b> · <b>ATPG</b> · <b>POWER ANALYSIS</b> · <b>VERIFICATION</b> · <b>UVM</b> · <b>HLS</b> · <b>FPGA</b> · <b>ASIC</b> · <b>FIRMWARE</b> · <b>FREERTOS</b> · <b>MQTT</b> · <b>PCB</b> · <b>KICAD</b> ·</span>
+            <span><b>RTL</b> · <b>SYNTHESIS</b> · <b>PnR</b> · <b>STA</b> · <b>DFT</b> · <b>ATPG</b> · <b>POWER</b> · <b>VERIFICATION</b> · <b>UVM</b> · <b>HLS</b> · <b>FPGA</b> · <b>ASIC</b> · <b>FIRMWARE</b> · <b>FREERTOS</b> · <b>OTA</b> · <b>MQTT</b> · <b>PCB</b> · <b>KICAD</b> · <b>GERBER</b> · <b>BOM</b> · <b>SUPPLIER APIs</b> · <b>PYTHON</b> · <b>SQL</b> ·</span>
+            <span><b>RTL</b> · <b>SYNTHESIS</b> · <b>PnR</b> · <b>STA</b> · <b>DFT</b> · <b>ATPG</b> · <b>POWER</b> · <b>VERIFICATION</b> · <b>UVM</b> · <b>HLS</b> · <b>FPGA</b> · <b>ASIC</b> · <b>FIRMWARE</b> · <b>FREERTOS</b> · <b>OTA</b> · <b>MQTT</b> · <b>PCB</b> · <b>KICAD</b> · <b>GERBER</b> · <b>BOM</b> · <b>SUPPLIER APIs</b> · <b>PYTHON</b> · <b>SQL</b> ·</span>
         </div>
     </div>
 </section>
 
-<!-- ===== [04] DOSSIER ===== -->
+<!-- ===== [05] DOSSIER ===== -->
 <section id="dossier" class="reveal">
     <div class="sec-header">
-        <span class="sec-id">[04]</span>
+        <span class="sec-id">[05]</span>
         <h2 class="sec-title">Dossier</h2>
         <div class="sec-rule"></div>
         <span class="sec-meta">// cv.v2</span>
@@ -1460,7 +1787,7 @@
     </div>
 </section>
 
-<!-- ===== [05] SIGNAL ===== -->
+<!-- ===== [06] SIGNAL ===== -->
 <section id="signal" class="signal reveal">
     <svg class="radar" viewBox="0 0 360 360" fill="none" aria-hidden="true">
         <g stroke="#00d4ff" stroke-width="0.6" fill="none" opacity="0.5">
@@ -1485,7 +1812,7 @@
     </svg>
 
     <div class="sec-header">
-        <span class="sec-id">[05]</span>
+        <span class="sec-id">[06]</span>
         <h2 class="sec-title">Signal</h2>
         <div class="sec-rule"></div>
         <span class="sec-meta">// contact.open</span>
@@ -1590,7 +1917,7 @@ window.addEventListener('load', () => {
     }
 
     // ---------- Role rotator ----------
-    const roles = ['FPGA Design', 'ASIC Implementation', 'Embedded Firmware', 'Digital Verification', 'Silicon at the edge'];
+    const roles = ['FPGA Design', 'ASIC Implementation', 'Embedded Firmware', 'PCB Automation', 'Manufacturing Tooling', 'Silicon at the edge'];
     const word = document.getElementById('role-word');
     if (word && !reduced) {
         let ri = 0;
@@ -1780,7 +2107,7 @@ window.addEventListener('load', () => {
     // ---------- Scroll progress + scroll-top + nav spy ----------
     const progEl = document.getElementById('scroll-progress');
     const topBtn = document.getElementById('scroll-top');
-    const sections = ['home','identity','works','stack','dossier','signal'].map(id => document.getElementById(id));
+    const sections = ['home','identity','experience','works','stack','dossier','signal'].map(id => document.getElementById(id));
     const updateOnScroll = () => {
         const sc = window.scrollY;
         const max = document.documentElement.scrollHeight - window.innerHeight;
