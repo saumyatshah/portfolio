@@ -1,7 +1,7 @@
 # 🌐 Portfolio Website - Saumya Shah
 
 Welcome to my **personal portfolio website**, hosted on [GitHub Pages](https://saumyatshah.github.io/portfolio).  
-This site showcases my background as an **FPGA, ASIC, and Embedded Systems Engineer**.
+This site showcases my work across **Hardware • Firmware • Manufacturing Automation** — PCB tooling and AOI, embedded systems, and FPGA/ASIC design.
 
 ---
 
